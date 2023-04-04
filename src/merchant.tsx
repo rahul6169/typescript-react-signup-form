@@ -36,7 +36,7 @@ const Merchant = () => {
         },
         refetchQueries: ["CreateCustomer"],
       });
-    } catch (eror) {}
+    } catch (error) {}
   };
 
   return (
