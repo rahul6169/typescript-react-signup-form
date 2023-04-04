@@ -26,3 +26,19 @@ export const CREATE_CUSTOMER = gql`
     }
   }
 `;
+export const GET_CUSTOMER = gql`
+  query GetCustomer($getCustomerId: String!) {
+    getCustomer(id: $getCustomerId) {
+      email
+      contactPhoneNumber
+      contactName
+      contactEmail
+      number
+      userName
+      createdAt
+      updatedAt
+      archived
+      id
+    }
+  }
+`;
