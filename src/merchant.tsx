@@ -1,15 +1,18 @@
 import { DeleteFilled, EditFilled } from "@ant-design/icons";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { Button, DatePicker } from "antd";
 import { useState } from "react";
-import { CREATE_CUSTOMER } from "./query";
-
+import { CREATE_CUSTOMER, GET_ALL_CUSTOMERS } from "./query";
+import "./merchant.css";
+import { log } from "console";
+import { GET_CUSTOMER } from "./query";
 const Merchant = () => {
-  const [merchantList, setMerchantList] = useState([]);
-  const [date, setDate] = useState(null);
+  const [merchantList, setMerchantList]: any = useState([]);
   const [createCustomer, { loading }] = useMutation(CREATE_CUSTOMER);
+  const { data } = useQuery(GET_ALL_CUSTOMERS);
+  const list = data?.getAllCustomer;
 
-  const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues]: any = useState({
     userName: "",
     email: "",
     number: "",
@@ -52,7 +55,7 @@ const Merchant = () => {
             type="text"
             value={formValues.userName}
             onChange={(e) => {
-              setFormValues((prev) => {
+              setFormValues((prev: any) => {
                 return {
                   ...prev,
                   userName: e.target.value,
@@ -72,7 +75,7 @@ const Merchant = () => {
             type="email"
             value={formValues.email}
             onChange={(e) => {
-              setFormValues((prev) => {
+              setFormValues((prev: any) => {
                 return {
                   ...prev,
                   email: e.target.value,
@@ -91,7 +94,7 @@ const Merchant = () => {
             type="tel"
             value={formValues.number}
             onChange={(e) => {
-              setFormValues((prev) => {
+              setFormValues((prev: any) => {
                 return {
                   ...prev,
                   number: e.target.value,
@@ -112,7 +115,7 @@ const Merchant = () => {
             type="text"
             value={formValues.contactName}
             onChange={(e) => {
-              setFormValues((prev) => {
+              setFormValues((prev: any) => {
                 return {
                   ...prev,
                   contactName: e.target.value,
@@ -130,7 +133,7 @@ const Merchant = () => {
             type="email"
             value={formValues.contactEmail}
             onChange={(e) => {
-              setFormValues((prev) => {
+              setFormValues((prev: any) => {
                 return {
                   ...prev,
                   contactEmail: e.target.value,
@@ -149,7 +152,7 @@ const Merchant = () => {
             type="tel"
             value={formValues.contactPhoneNumber}
             onChange={(e) => {
-              setFormValues((prev) => {
+              setFormValues((prev: any) => {
                 return {
                   ...prev,
                   contactPhoneNumber: e.target.value,
@@ -170,7 +173,7 @@ const Merchant = () => {
         </div>
       </form>
 
-      {/* <div className="table-data">
+      <div className="table-data">
         <table id="list">
           <thead>
             <tr>
@@ -180,17 +183,13 @@ const Merchant = () => {
               <th>Contact Name</th>
               <th>Contact Email</th>
               <th>Contact Phone Number</th>
-              <th>Type</th>
-              <th>Percent</th>
-              <th>Activefrom</th>
-              <th>Payments</th>
-              <th>Notes</th>
+
               <th>Edit</th>
               <th>Delete</th>
             </tr>
           </thead>
           <tbody className="tableData">
-            {merchantList?.map((merchant, index): any => (
+            {list?.map((merchant: any, index: any): any => (
               <tr key={merchant?._id + index}>
                 <td>{merchant?.userName}</td>
                 <td>{merchant?.email}</td>
@@ -209,7 +208,7 @@ const Merchant = () => {
             ))}
           </tbody>
         </table>
-      </div> */}
+      </div>
     </>
   );
 };
