@@ -1,18 +1,5 @@
 import { gql } from "@apollo/client";
 
-// export const CREATE_CUSTOMER = gql`
-//   mutation CreateCustomer($createCustomerId: String!) {
-//     createCustomer(id: $createCustomerId) {
-//       id
-//       email
-//       contactName
-//       contactEmail
-//       number
-//       userName
-//     }
-//   }
-// `;
-
 export const CREATE_CUSTOMER = gql`
   mutation CreateCustomer($createAuthUserDto: CustomerProfile!) {
     createCustomer(createAuthUserDto: $createAuthUserDto) {
@@ -39,6 +26,29 @@ export const GET_CUSTOMER = gql`
       updatedAt
       archived
       id
+    }
+  }
+`;
+
+export const GET_ALL_CUSTOMERS = gql`
+  query GetAllCustomer {
+    getAllCustomer {
+      id
+      userName
+      email
+      contactName
+      contactEmail
+      contactPhoneNumber
+      number
+    }
+  }
+`;
+
+export const DELETE_CUSTOMER = gql`
+  mutation DeleteCustomer($deleteCustomerId: String!) {
+    deleteCustomer(id: $deleteCustomerId) {
+      id
+      userName
     }
   }
 `;
